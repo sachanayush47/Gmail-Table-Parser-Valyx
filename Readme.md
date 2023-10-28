@@ -1,8 +1,10 @@
 Assumption made:
-    - PDF follows a particular format
+
+    - PDF always follows a particular format
     - All data is sorted by date
 
 How to setup locally?
+
     - Clone the repo
     - To install node packages: npm install
     - Generate google token: npm run generateToken
@@ -13,22 +15,27 @@ How to setup locally?
         - csv
     - To run server: npm run dev
     - Server runs at port 8000
-    - Make sure port 8000 and 3000 are not being by any other service
+    - Make sure port 8000 and 3000 are not being used by any other service
     - Entry point of the server is 'index.js' at the root
     - Resources folder contain the files to test the application. It have 2 files i.e 'bank.pdf' to directly test it out and 'statement.docx' is just an docx version of bank.pdf to modify the data per your needs.
 
 Working?
+
     - All the downloaded pdf will be stored under directory 'downloadedPdfs/'
     - To download PDF, it uses gmail API. It uses google OAuth to authenticate. You need to authorize the application by running 'npm run generateToken'
-    - To parse table from the PDF, it uses pdfplumber python library.
-    - After successfull parsing, it saves the parsed into a csv file 'data.csv' at root directory
+    - To parse table from the PDF, it uses pdfplumber python library. Node.js executes 'tableParser.py'. You can find 'tableParser.py' under 'util' folder
+    - After successfull parsing, it saves the parsed data into a csv file 'data.csv' at root directory
 
 APIs?
+
     1. Downloads PDF from emails and Parses table from PDF
         - ROUTE: GET /api/v1/pdf/generate-data-from-email/
+        - RETURNS: All parsed data in a list
 
     2. Find records within a date
         - ROUTE: GET /api/v1/pdf/find-records?startDate={DATE}&endDate={DATE}
+        - RETURNS: List of records satisfying condition
+        
         - Query string is optional
         - Date format should be: MM/DD/YYYY
         - IF the dates are not provided then return all records.
@@ -38,6 +45,8 @@ APIs?
     
     3. Find balance by date (Returns the first date encountered)
         - ROUTE: GET /api/v1/pdf/get-balance?date={DATE}
+        - RETURNS: If condition satisfies returns {balance} else null
+        
         - Query string is mandatory
         - Date format should be: MM/DD/YYYY
         - If multiple records present on a date then only send the balance from the first matching record
