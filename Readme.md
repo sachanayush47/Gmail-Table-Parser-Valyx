@@ -34,6 +34,7 @@ APIs?
 
     2. Find records within a date
         - ROUTE: GET /api/v1/pdf/find-records?startDate={DATE}&endDate={DATE}
+        - Example: http://localhost:8000/api/v1/pdf/find-records?startDate=10/25/2014&endDate=11/01/2014
         - RETURNS: List of records satisfying condition
         
         - Query string is optional
@@ -45,6 +46,7 @@ APIs?
     
     3. Find balance by date (Returns the first date encountered)
         - ROUTE: GET /api/v1/pdf/get-balance?date={DATE}
+        - Example: http://localhost:8000/api/v1/pdf/get-balance?date=11/01/2014
         - RETURNS: If condition satisfies returns {balance} else null
         
         - Query string is mandatory

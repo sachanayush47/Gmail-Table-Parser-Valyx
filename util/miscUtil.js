@@ -6,7 +6,7 @@ import path from "path";
 export function runPythonTableParser() {
     return new Promise((resolve, reject) => {
         try {
-            PythonShell.run(path.join("utils", "tableParser.py"), null).then(() => {
+            PythonShell.run(path.join("util", "tableParser.py"), null).then(() => {
                 console.log("Table parsed");
                 resolve();
             });
